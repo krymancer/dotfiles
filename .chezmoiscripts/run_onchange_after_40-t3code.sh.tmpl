@@ -8,6 +8,14 @@ if ! systemctl --user cat t3code.service >/dev/null 2>&1; then
   mise exec node -- npx -y t3@nightly service install
 fi
 
+# `t3` on PATH (used by t3-update.timer): link it to the launcher the service runs,
+# which stays put across updates. An npx install does not create this link.
+if [ ! -e "$HOME/.local/bin/t3" ]; then
+  launcher=$(sed -n "s/^ExecStart=\([^ ]*\).*/\1/p" "$HOME/.config/systemd/user/t3code.service")
+  mkdir -p "$HOME/.local/bin"
+  ln -s "$launcher" "$HOME/.local/bin/t3"
+fi
+
 # Keep user services running without an active login
 if [ "$(loginctl show-user "$USER" -p Linger --value)" != "yes" ]; then
   sudo loginctl enable-linger "$USER"
