@@ -19,24 +19,29 @@ sudo pacman -S chezmoi
 chezmoi init --apply krymancer
 ```
 
+Run it from a real terminal (or `ssh -t`): paru needs a TTY.
+
 `chezmoi apply` also:
 
-1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt`, plus `arch-<hostname>.txt` if one exists on Arch Linux),
+1. installs packages from `packages/` (`Brewfile` on macOS; on Arch Linux `arch.txt`, plus `arch-<hostname>.txt` if one exists),
 2. runs `mise install` for the runtimes in `~/.config/mise/config.toml`,
-. on Linux, installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours.
+3. installs Claude Code, Codex and opencode with their official installers if missing (they self-update),
+4. on Linux:
+   - enables `sshd`, `tailscaled` and rootless podman (`podman.socket`), and lets the tailnet and the k3s/Termix box through `ufw`,
+   - installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours,
+   - logs into XFCE automatically (LightDM autologin) and runs x11vnc,
+   - never sleeps (sleep targets masked, lid switch ignored) and stops charging at 80%, since these are always-on, plugged-in laptops.
 
 Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/config.nvim)) and is pulled in via `.chezmoiexternal.toml`.
 
 ## Not in this repo (set up by hand)
 
 - SSH keys (`~/.ssh/id_ed25519`); add the new public key to GitHub and to `dot_config/git/allowed_signers`
-- `gh auth login`
-- `~/.kube/config-k3s` (copy from the k3s server)
-- `~/.vnc/passwd` (`x11vnc -storepasswd`); the Linux boxes log into XFCE automatically (LightDM autologin) so x11vnc works after a reboot
-- The Linux boxes never sleep: sleep targets are masked and the lid switch is ignored
-- Battery charging stops at 80% (`battery-charge-limit.service`), since they stay plugged in
+- `gh auth login`, and signing in to Claude Code / Codex
+- `~/.kube/config-k3s` (copy from the k3s server, or from another machine)
+- `~/.vnc/passwd` (`x11vnc -storepasswd`, max 8 characters)
 - `sudo tailscale up` (remove the old machine from the Tailscale admin console first, or the new one becomes `<name>-1`)
-- T3 Code: `t3 connect --headless` to link it to T3 Connect; deregister the old environment on the T3 Connect page after a reinstall
+- T3 Code: `t3 connect --headless` to link it to T3 Connect; after a reinstall, deregister the old environment on the T3 Connect page
 
 ## Daily use
 
