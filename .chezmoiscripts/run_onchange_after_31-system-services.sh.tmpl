@@ -3,4 +3,12 @@
 # System services every Linux box needs. Logging in to Tailscale (`sudo tailscale up`) stays manual.
 set -euo pipefail
 sudo systemctl enable --now sshd tailscaled
+
+# Firewall: trust the tailnet, and let the k3s/Termix box on the LAN reach SSH and VNC.
+# (Tailscale's own ts-input chain already accepts tailscale0; this keeps it explicit.)
+if command -v ufw >/dev/null; then
+  sudo ufw allow in on tailscale0 comment 'Tailscale'
+  sudo ufw allow from 192.168.0.20 to any port 22 proto tcp comment 'SSH from k3s/Termix LAN'
+  sudo ufw allow from 192.168.0.20 to any port 5900 proto tcp comment 'x11vnc from k3s/Termix LAN'
+fi
 {{ end -}}
