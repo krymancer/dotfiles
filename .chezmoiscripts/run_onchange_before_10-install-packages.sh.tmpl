@@ -18,5 +18,5 @@ brew bundle --no-upgrade --file={{ joinPath .chezmoi.sourceDir "packages/Brewfil
 set -euo pipefail
 cd {{ .chezmoi.sourceDir | quote }}
 grep -hvE '^\s*(#|$)' packages/arch.txt{{ if $hasHost }} {{ $host }}{{ end }} \
-  | paru -S --needed --noconfirm -
+  | paru -Syu --needed --noconfirm -
 {{ end -}}

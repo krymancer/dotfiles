@@ -1,6 +1,6 @@
 # Packages for every Arch/CachyOS machine, on top of the CachyOS base install.
 # Per-host extras go in arch-<hostname>.txt.
-# Installed with: paru -S --needed
+# Installed with: paru -Syu --needed (full upgrade first; Arch does not support partial upgrades)
 
 # shell & CLI
 bat
