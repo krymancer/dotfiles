@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.hostname "panam" -}}
+#!/bin/bash
+# panam: log straight into XFCE on boot so the x11vnc user service has a display to attach to.
+set -euo pipefail
+user={{ .chezmoi.username | quote }}
+
+sudo groupadd -rf autologin
+sudo gpasswd -a "$user" autologin >/dev/null
+
+sudo install -Dm644 /dev/stdin /etc/lightdm/lightdm.conf.d/50-autologin.conf <<CONF
+[Seat:*]
+autologin-user=$user
+autologin-session=xfce
+CONF
+{{ end -}}

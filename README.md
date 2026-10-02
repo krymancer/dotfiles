@@ -33,6 +33,7 @@ Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/
 - `gh auth login`
 - `~/.kube/config-k3s` (copy from the k3s server)
 - `~/.vnc/passwd` on panam (`x11vnc -storepasswd`)
+- panam logs into XFCE automatically (LightDM autologin, set by a panam-only script) so x11vnc works after a reboot
 - `tailscale up`
 
 ## Daily use
