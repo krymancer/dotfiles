@@ -1,0 +1,20 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Always-plugged-in laptops: stop charging at 80% to spare the battery.
+set -euo pipefail
+
+sudo install -Dm644 /dev/stdin /etc/systemd/system/battery-charge-limit.service <<'UNIT'
+[Unit]
+Description=Stop battery charging at 80%
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'for f in /sys/class/power_supply/BAT*/charge_control_end_threshold; do [ -w "$f" ] && echo 80 > "$f"; done; true'
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+sudo systemctl daemon-reload
+sudo systemctl enable --now battery-charge-limit.service
+{{ end -}}
