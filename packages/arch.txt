@@ -41,7 +41,6 @@ podman-docker
 postgresql
 
 # dev
-hledger-bin
 wrangler
 xorg-server-xvfb
 
