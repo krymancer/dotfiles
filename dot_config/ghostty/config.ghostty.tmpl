@@ -1,0 +1,5 @@
+theme = Catppuccin Mocha
+shell-integration-features = ssh-env,ssh-terminfo
+{{- if eq .chezmoi.os "darwin" }}
+command = /opt/homebrew/bin/fish --login
+{{- end }}

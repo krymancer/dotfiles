@@ -1,0 +1,8 @@
+[tools]
+node = "lts"
+bun = "latest"
+zig = "latest"
+
+[settings]
+# Respect .nvmrc / .node-version in projects (fnm compatibility)
+idiomatic_version_file_enable_tools = ["node"]

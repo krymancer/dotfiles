@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# Brewfile hash: {{ include "packages/Brewfile" | sha256sum }}
+set -euo pipefail
+if ! command -v brew >/dev/null; then
+  echo "Homebrew is missing, install it first: https://brew.sh" >&2
+  exit 1
+fi
+brew bundle --no-upgrade --file={{ joinPath .chezmoi.sourceDir "packages/Brewfile" | quote }}
+{{ else if eq .chezmoi.os "linux" -}}
+{{   $host := printf "packages/arch-%s.txt" .chezmoi.hostname -}}
+{{   $hasHost := stat (joinPath .chezmoi.sourceDir $host) -}}
+#!/bin/bash
+# arch hash: {{ include "packages/arch.txt" | sha256sum }}
+{{   if $hasHost -}}
+# {{ $host }} hash: {{ include $host | sha256sum }}
+{{   end -}}
+set -euo pipefail
+cd {{ .chezmoi.sourceDir | quote }}
+grep -hvE '^\s*(#|$)' packages/arch.txt{{ if $hasHost }} {{ $host }}{{ end }} \
+  | paru -S --needed --noconfirm -
+{{ end -}}

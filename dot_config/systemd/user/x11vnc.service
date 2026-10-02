@@ -1,0 +1,14 @@
+[Unit]
+Description=x11vnc VNC server for display :0 (Tailscale only)
+After=default.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+ExecStart=/usr/bin/x11vnc -display :0 -auth %h/.Xauthority -rfbport 5900 -rfbauth %h/.vnc/passwd -usepw -forever -shared -listen 0.0.0.0 -no6 -noipv6 -ncache 0 -noxdamage -o %h/.vnc/x11vnc.log
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

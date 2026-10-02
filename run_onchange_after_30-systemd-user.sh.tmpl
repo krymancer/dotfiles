@@ -1,0 +1,13 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Re-run when any unit changes.
+{{ range (glob (joinPath .chezmoi.sourceDir "dot_config/systemd/user/*.service")) -}}
+# {{ base . }}: {{ include . | sha256sum }}
+{{ end -}}
+set -euo pipefail
+systemctl --user daemon-reload
+systemctl --user enable --now podman.socket
+{{ if eq .chezmoi.hostname "panam" -}}
+systemctl --user enable x11vnc.service
+{{ end -}}
+{{ end -}}

@@ -1,0 +1,4 @@
+[".config/nvim"]
+    type = "git-repo"
+    url = "https://github.com/krymancer/config.nvim.git"
+    refreshPeriod = "168h"

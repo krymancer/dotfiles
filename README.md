@@ -1,1 +1,46 @@
-# Dotfiles
+# dotfiles
+
+Managed with [chezmoi](https://chezmoi.io) across:
+
+| Host  | OS                 |
+|-------|--------------------|
+| rogue | macOS              |
+| judy  | CachyOS (XFCE)     |
+| panam | CachyOS (XFCE)     |
+
+## Bootstrap a new machine
+
+```sh
+# macOS: install Homebrew first (https://brew.sh), then
+brew install chezmoi
+# CachyOS
+sudo pacman -S chezmoi
+
+chezmoi init --apply krymancer
+```
+
+`chezmoi apply` also:
+
+1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt` + `arch-<hostname>.txt` if present on CachyOS),
+2. runs `mise install` for the runtimes in `~/.config/mise/config.toml`,
+. on Linux, installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours.
+
+Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/config.nvim)) and is pulled in via `.chezmoiexternal.toml`.
+
+## Not in this repo (set up by hand)
+
+- SSH keys (`~/.ssh/id_ed25519`); add the new public key to GitHub and to `dot_config/git/allowed_signers`
+- `gh auth login`
+- `~/.kube/config-k3s` (copy from the k3s server)
+- `~/.vnc/passwd` on panam (`x11vnc -storepasswd`)
+- `tailscale up`
+
+## Daily use
+
+```sh
+chezmoi edit --apply ~/.config/fish/config.fish   # edit a managed file
+chezmoi re-add                                     # pull in edits made directly to target files
+chezmoi diff                                       # preview changes
+chezmoi update                                     # git pull + apply
+chezmoi cd                                         # jump to this repo to commit/push
+```

@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# T3 Code server (nightly) as a user service. t3 writes and manages t3code.service
+# itself; t3-update.timer keeps it on the latest nightly.
+set -euo pipefail
+
+if ! systemctl --user cat t3code.service >/dev/null 2>&1; then
+  mise exec node -- npx -y t3@nightly service install
+fi
+
+# Keep user services running without an active login
+if [ "$(loginctl show-user "$USER" -p Linger --value)" != "yes" ]; then
+  sudo loginctl enable-linger "$USER"
+fi
+
+systemctl --user daemon-reload
+systemctl --user enable --now t3-update.timer
+{{ end -}}

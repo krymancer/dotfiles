@@ -1,0 +1,8 @@
+[Unit]
+Description=Update T3 Code to the latest nightly
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/t3 update --channel nightly --yes

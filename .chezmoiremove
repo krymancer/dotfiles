@@ -1,0 +1,5 @@
+# Replaced by files in this repo
+.config/fish/conf.d/alias.fish
+.config/fish/conf.d/env.fish
+.config/fish/conf.d/fnm.fish
+.config/ghostty/config

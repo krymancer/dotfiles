@@ -1,0 +1,61 @@
+# Packages for every Arch/CachyOS machine, on top of the CachyOS base install.
+# Per-host extras go in arch-<hostname>.txt.
+# Installed with: paru -S --needed
+
+# shell & CLI
+bat
+btop
+chezmoi
+duf
+eza
+fzf
+git
+github-cli
+glances
+jq
+just
+micro
+mosh
+neovim
+ripgrep
+rsync
+sshpass
+starship
+tmux
+tree
+vim
+wget
+zoxide
+
+# runtimes & languages
+jdk25-openjdk
+mise
+rust
+typst
+uv
+
+# containers & databases
+docker-compose
+podman
+podman-docker
+postgresql
+
+# dev
+hledger-bin
+wrangler
+xorg-server-xvfb
+
+# infra
+kubectl
+tailscale
+
+# desktop
+fcitx5
+fcitx5-configtool
+fcitx5-gtk
+fcitx5-qt
+ghostty
+google-chrome
+meld
+telegram-desktop
+tigervnc

@@ -1,0 +1,80 @@
+tap "steipete/tap"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Modern, maintained replacement for ls
+brew "eza"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Handy way to save and run project-specific commands
+brew "just"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Polyglot runtime manager (node, bun, …)
+brew "mise"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Markup-based typesetting system
+brew "typst"
+# Extremely fast Python package and project manager
+brew "uv"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Menu bar usage monitor for Codex and Claude
+cask "steipete/tap/codexbar", trusted: true
+# Open-source cross-platform alternative to AirDrop
+cask "localsend"
+# Command-line client for Steam
+cask "steamcmd"
+# T3 Code desktop app, nightly channel (auto-updates)
+cask "t3-code@nightly"
+vscode "anthropic.claude-code"
+vscode "bradlc.vscode-tailwindcss"
+vscode "catppuccin.catppuccin-vsc"
+vscode "catppuccin.catppuccin-vsc-icons"
+vscode "dbaeumer.vscode-eslint"
+vscode "devsense.composer-php-vscode"
+vscode "devsense.intelli-php-vscode"
+vscode "devsense.phptools-vscode"
+vscode "devsense.profiler-php-vscode"
+vscode "docker.docker"
+vscode "eamodio.gitlens"
+vscode "github.codespaces"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "gitlab.gitlab-workflow"
+vscode "golang.go"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-dotnettools.csdevkit"
+vscode "ms-dotnettools.csharp"
+vscode "ms-dotnettools.vscode-dotnet-runtime"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.cmake-tools"
+vscode "ms-vscode.cpp-devtools"
+vscode "ms-vscode.cpptools"
+vscode "ms-vscode.cpptools-extension-pack"
+vscode "ms-vscode.cpptools-themes"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "ocamllabs.ocaml-platform"
+vscode "rvest.vs-code-prettier-eslint"
+vscode "sst-dev.opencode"
+vscode "usernamehw.errorlens"
+vscode "vue.volar"
+vscode "yoavbls.pretty-ts-errors"
+vscode "ziglang.vscode-zig"

@@ -1,0 +1,20 @@
+{{- $gh := "/usr/bin/gh" -}}
+{{- if eq .chezmoi.os "darwin" }}{{ $gh = "/opt/homebrew/bin/gh" }}{{ end -}}
+[user]
+	name = Junior Nascimento
+	email = krymancer@protonmail.com
+	signingkey = {{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = {{ .chezmoi.homeDir }}/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[credential "https://github.com"]
+	helper =
+	helper = !{{ $gh }} auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !{{ $gh }} auth git-credential

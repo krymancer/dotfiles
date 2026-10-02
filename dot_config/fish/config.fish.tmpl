@@ -1,0 +1,21 @@
+{{ if eq .chezmoi.os "linux" -}}
+# CachyOS defaults (aliases, abbreviations, etc.)
+if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
+    source /usr/share/cachyos-fish-config/cachyos-config.fish
+end
+
+{{ end -}}
+# No greeting (CachyOS runs fastfetch here)
+function fish_greeting
+end
+
+if status is-interactive
+    if command -q starship
+        starship init fish | source
+    end
+end
+{{- if eq .chezmoi.hostname "judy" }}
+
+# clipssh
+set --export CLIPSSH_HOST junho@dev
+{{- end }}
