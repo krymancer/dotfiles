@@ -33,6 +33,7 @@ Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/
 - `gh auth login`
 - `~/.kube/config-k3s` (copy from the k3s server)
 - `~/.vnc/passwd` (`x11vnc -storepasswd`); the Linux boxes log into XFCE automatically (LightDM autologin) so x11vnc works after a reboot
+- The Linux boxes never sleep: sleep targets are masked and the lid switch is ignored
 - `tailscale up`
 
 ## Daily use

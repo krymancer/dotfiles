@@ -1,0 +1,27 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Always-on boxes: never suspend or hibernate, and closing the lid does nothing.
+set -euo pipefail
+
+sudo install -Dm644 /dev/stdin /etc/systemd/logind.conf.d/10-lid-no-sleep.conf <<'CONF'
+[Login]
+HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+CONF
+sudo systemctl kill -s HUP systemd-logind
+
+# Nothing can put the machine to sleep (idle timers, power menu, low battery)
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+
+# XFCE Power Manager: no lid action of its own, defer to logind
+bus="/run/user/$(id -u)/bus"
+if command -v xfconf-query >/dev/null && [ -S "$bus" ]; then
+  export DBUS_SESSION_BUS_ADDRESS="unix:path=$bus"
+  xfpm() { xfconf-query -c xfce4-power-manager -p "/xfce4-power-manager/$1" -s "$3" 2>/dev/null \
+    || xfconf-query -c xfce4-power-manager -p "/xfce4-power-manager/$1" -n -t "$2" -s "$3"; }
+  xfpm lid-action-on-ac int 0
+  xfpm lid-action-on-battery int 0
+  xfpm logind-handle-lid-switch bool true
+fi
+{{ end -}}
