@@ -12,6 +12,9 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+[push]
+	# `git push` on a new branch creates the same-named branch on origin and tracks it
+	autoSetupRemote = true
 [credential "https://github.com"]
 	helper =
 	helper = !{{ $gh }} auth git-credential

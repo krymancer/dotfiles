@@ -5,15 +5,15 @@ Managed with [chezmoi](https://chezmoi.io) across:
 | Host  | OS                 |
 |-------|--------------------|
 | rogue | macOS              |
-| judy  | CachyOS (XFCE)     |
-| panam | CachyOS (XFCE)     |
+| judy  | Arch Linux         |
+| panam | Arch Linux         |
 
 ## Bootstrap a new machine
 
 ```sh
 # macOS: install Homebrew first (https://brew.sh), then
 brew install chezmoi
-# CachyOS
+# Arch Linux
 sudo pacman -S chezmoi
 
 chezmoi init --apply krymancer
@@ -21,7 +21,7 @@ chezmoi init --apply krymancer
 
 `chezmoi apply` also:
 
-1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt`, plus `arch-<hostname>.txt` if one exists on CachyOS),
+1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt`, plus `arch-<hostname>.txt` if one exists on Arch Linux),
 2. runs `mise install` for the runtimes in `~/.config/mise/config.toml`,
 . on Linux, installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours.
 
