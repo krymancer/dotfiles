@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# System services every Linux box needs. Logging in to Tailscale (`sudo tailscale up`) stays manual.
+set -euo pipefail
+sudo systemctl enable --now sshd tailscaled
+{{ end -}}
