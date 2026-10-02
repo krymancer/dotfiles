@@ -35,7 +35,8 @@ Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/
 - `~/.vnc/passwd` (`x11vnc -storepasswd`); the Linux boxes log into XFCE automatically (LightDM autologin) so x11vnc works after a reboot
 - The Linux boxes never sleep: sleep targets are masked and the lid switch is ignored
 - Battery charging stops at 80% (`battery-charge-limit.service`), since they stay plugged in
-- `tailscale up`
+- `sudo tailscale up` (remove the old machine from the Tailscale admin console first, or the new one becomes `<name>-1`)
+- T3 Code: `t3 connect --headless` to link it to T3 Connect; deregister the old environment on the T3 Connect page after a reinstall
 
 ## Daily use
 
