@@ -1,2 +1,0 @@
-# panam-only packages
-x11vnc

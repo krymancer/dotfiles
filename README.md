@@ -21,7 +21,7 @@ chezmoi init --apply krymancer
 
 `chezmoi apply` also:
 
-1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt` + `arch-<hostname>.txt` if present on CachyOS),
+1. installs packages from `packages/` (`Brewfile` on macOS; `arch.txt`, plus `arch-<hostname>.txt` if one exists on CachyOS),
 2. runs `mise install` for the runtimes in `~/.config/mise/config.toml`,
 . on Linux, installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours.
 
@@ -32,8 +32,7 @@ Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/
 - SSH keys (`~/.ssh/id_ed25519`); add the new public key to GitHub and to `dot_config/git/allowed_signers`
 - `gh auth login`
 - `~/.kube/config-k3s` (copy from the k3s server)
-- `~/.vnc/passwd` on panam (`x11vnc -storepasswd`)
-- panam logs into XFCE automatically (LightDM autologin, set by a panam-only script) so x11vnc works after a reboot
+- `~/.vnc/passwd` (`x11vnc -storepasswd`); the Linux boxes log into XFCE automatically (LightDM autologin) so x11vnc works after a reboot
 - `tailscale up`
 
 ## Daily use

@@ -7,7 +7,5 @@
 set -euo pipefail
 systemctl --user daemon-reload
 systemctl --user enable --now podman.socket
-{{ if eq .chezmoi.hostname "panam" -}}
 systemctl --user enable x11vnc.service
-{{ end -}}
 {{ end -}}

@@ -1,6 +1,6 @@
-{{ if eq .chezmoi.hostname "panam" -}}
+{{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
-# panam: log straight into XFCE on boot so the x11vnc user service has a display to attach to.
+# Log straight into XFCE on boot so the x11vnc user service has a display to attach to.
 set -euo pipefail
 user={{ .chezmoi.username | quote }}
 
