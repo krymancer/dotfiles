@@ -25,9 +25,10 @@ Run it from a real terminal (or `ssh -t`): paru needs a TTY.
 
 1. installs packages from `packages/` (`Brewfile` on macOS; on Arch Linux `arch.txt`, plus `arch-<hostname>.txt` if one exists),
 2. runs `mise install` for the runtimes in `~/.config/mise/config.toml`,
-3. installs Claude Code, Codex, opencode, Cursor Agent and Grok with their official installers if missing (they self-update),
+3. installs Claude Code, Codex, opencode, Cursor Agent, Grok (and Pi on Linux) with their official installers if missing (they self-update),
 4. on Linux:
    - enables `sshd`, `tailscaled` and rootless podman (`podman.socket`), and lets the tailnet and the k3s/Termix box through `ufw`,
+   - gives systemd user services a full PATH (`~/.config/environment.d/10-path.conf`) so T3 Code finds the provider CLIs and mise runtimes,
    - installs the T3 Code server (nightly) as a user service, with `t3-update.timer` pulling new nightlies every 3 hours,
    - logs into XFCE automatically (LightDM autologin) and runs x11vnc,
    - never sleeps (sleep targets masked, lid switch ignored) and stops charging at 80%, since these are always-on, plugged-in laptops.

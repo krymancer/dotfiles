@@ -1,11 +1,14 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
-# Re-run when any unit changes.
-{{ range (glob (joinPath .chezmoi.sourceDir "dot_config/systemd/user/*.service")) -}}
+# Re-runs when any user unit or the user-service PATH (environment.d) changes.
+{{ range (glob (joinPath .chezmoi.sourceDir "dot_config/systemd/user/*")) -}}
 # {{ base . }}: {{ include . | sha256sum }}
 {{ end -}}
+# 10-path.conf: {{ include "dot_config/environment.d/10-path.conf" | sha256sum }}
 set -euo pipefail
 systemctl --user daemon-reload
 systemctl --user enable --now podman.socket
 systemctl --user enable x11vnc.service
+# Services pick up environment.d changes on restart
+if systemctl --user is-active --quiet t3code.service; then systemctl --user restart t3code.service; fi
 {{ end -}}

@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI coding CLIs (Claude Code, Codex, opencode, Cursor, Grok) via their official installers;
+# AI coding CLIs (Claude Code, Codex, opencode, Cursor, Grok, Pi) via their official installers;
 # each updates itself afterwards.
 # Only installs what's missing.
 set -euo pipefail
@@ -26,4 +26,10 @@ fi
 # (config.fish here); 00-path.fish already puts ~/.grok/bin on PATH.
 if [ ! -x "$HOME/.grok/bin/grok" ]; then
   curl -fsSL https://x.ai/cli/install.sh | SHELL=/bin/sh bash
+fi
+
+# Pi (Linux only, used by T3 Code). Its installer needs node/npm (mise shims) and asks questions
+# on /dev/tty; setsid detaches it from the terminal so it runs unattended and leaves rc files alone.
+if [ "$(uname -s)" = Linux ] && [ ! -x "$HOME/.local/bin/pi" ]; then
+  PATH="$HOME/.local/share/mise/shims:$PATH" setsid -w sh -c 'curl -fsSL https://pi.dev/install.sh | sh'
 fi

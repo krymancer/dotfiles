@@ -9,6 +9,8 @@ packages/**
 {{ if ne .chezmoi.os "linux" }}
 .config/systemd
 .config/systemd/**
+.config/environment.d
+.config/environment.d/**
 .config/containers
 .config/containers/**
 .config/fish/conf.d/podman.fish
