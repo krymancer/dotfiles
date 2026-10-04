@@ -33,6 +33,8 @@ Run it from a real terminal (or `ssh -t`): paru needs a TTY.
    - logs into XFCE automatically (LightDM autologin) and runs x11vnc,
    - never sleeps (sleep targets masked, lid switch ignored) and stops charging at 80%, since these are always-on, plugged-in laptops.
 
+AI agents never credit themselves in commits or PRs: Claude Code (`attribution`) and Cursor Agent (`attribution.attributeCommitsToAgent/PRsToAgent`) are set by `modify_` scripts that only touch those keys. Codex, Grok, Pi, opencode and T3 Code add no co-author trailers.
+
 Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/config.nvim)) and is pulled in via `.chezmoiexternal.toml`.
 
 ## Not in this repo (set up by hand)

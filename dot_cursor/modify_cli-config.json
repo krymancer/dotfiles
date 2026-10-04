@@ -1,0 +1,8 @@
+#!/bin/sh
+# Cursor Agent CLI: don't attribute commits or PRs to the agent.
+# Only these keys are managed; Cursor creates the rest of cli-config.json itself.
+PATH="/opt/homebrew/bin:$PATH"
+input=$(cat)
+# No config yet: leave it to Cursor (empty output = no file); the next apply sets the keys.
+[ -n "$input" ] || exit 0
+printf '%s' "$input" | jq '.attribution.attributeCommitsToAgent = false | .attribution.attributePRsToAgent = false'
