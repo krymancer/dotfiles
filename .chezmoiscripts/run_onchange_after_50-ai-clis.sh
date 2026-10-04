@@ -33,3 +33,9 @@ fi
 if [ "$(uname -s)" = Linux ] && [ ! -x "$HOME/.local/bin/pi" ]; then
   PATH="$HOME/.local/share/mise/shims:$PATH" setsid -w sh -c 'curl -fsSL https://pi.dev/install.sh | sh'
 fi
+
+# Railway CLI in agents mode (CLI + agent skills + Railway MCP for Claude/Codex/opencode/Cursor/Pi).
+# SHELL=/bin/sh: skip its config.fish edit; 00-path.fish puts ~/.railway/bin on PATH.
+if [ ! -x "$HOME/.railway/bin/railway" ]; then
+  curl -fsSL https://railway.com/install.sh | SHELL=/bin/sh sh -s -- --agents -y
+fi

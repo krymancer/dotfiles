@@ -1,7 +1,7 @@
 fish_add_path -g $HOME/.local/bin
 
 # Tools installed by their own installers
-for dir in $HOME/.bun/bin $HOME/.opencode/bin $HOME/.grok/bin
+for dir in $HOME/.bun/bin $HOME/.opencode/bin $HOME/.grok/bin $HOME/.railway/bin
     if test -d $dir
         fish_add_path -g $dir
     end

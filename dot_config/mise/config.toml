@@ -3,6 +3,11 @@ node = "lts"
 bun = "latest"
 zig = "latest"
 
+# Dev CLIs (mise keeps npm tools independent of the node version)
+"npm:wrangler" = "latest"
+"npm:@posthog/cli" = "latest"
+sentry-cli = "latest"
+
 [settings]
 # Respect .nvmrc / .node-version in projects (fnm compatibility)
 idiomatic_version_file_enable_tools = ["node"]
