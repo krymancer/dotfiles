@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "windows" -}}
+# T3 Code: no product telemetry. The desktop app reads user environment variables
+# at launch, so restart it after the first apply.
+[Environment]::SetEnvironmentVariable('T3CODE_TELEMETRY_ENABLED', 'false', 'User')
+{{ end -}}

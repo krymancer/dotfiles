@@ -1,0 +1,8 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Reload the systemd user manager's environment.d and restart T3 Code so it picks it up.
+# 20-t3code.conf hash: {{ include "dot_config/environment.d/20-t3code.conf" | sha256sum }}
+set -euo pipefail
+systemctl --user daemon-reload
+systemctl --user try-restart t3code.service
+{{ end -}}

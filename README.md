@@ -35,6 +35,8 @@ Run it from a real terminal (or `ssh -t`): paru needs a TTY.
 
 AI agents never credit themselves in commits or PRs: Claude Code (`attribution`) and Cursor Agent (`attribution.attributeCommitsToAgent/PRsToAgent`) are set by `modify_` scripts that only touch those keys. Codex, Grok, Pi, opencode and T3 Code add no co-author trailers.
 
+T3 Code telemetry is off everywhere (`T3CODE_TELEMETRY_ENABLED=false`): `~/.config/environment.d/20-t3code.conf` for the Linux user service, `~/.config/fish/conf.d/t3code.fish` for the macOS app (it imports the login shell's environment), and a user environment variable on Windows.
+
 Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/config.nvim)) and is pulled in via `.chezmoiexternal.toml`.
 
 ## Not in this repo (set up by hand)
