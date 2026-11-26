@@ -37,9 +37,11 @@ Follow the pattern of an existing app of the same shape (e.g. `k8s/apps/compass`
    must be public.
 2. `k8s/argocd/apps/<app>.yaml`: Application pointing at that path (`CreateNamespace=true`).
 3. Add the namespace to both reflector lists in `k8s/apps/cert-manager/wildcard-cert.yaml`.
-4. Secrets: commit a `*-secret.example.yaml`, never the real one. Create the real Secret with
+4. DNS: add `192.168.0.20 <app>.homelab.krymancer.dev` to `k8s/apps/pihole/configmap.yaml`.
+   Optionally add a launcher entry in `k8s/apps/glance/configmap.yaml`.
+5. Secrets: commit a `*-secret.example.yaml`, never the real one. Create the real Secret with
    `kubectl` and tell the user which command to run if it needs a value only they have.
-5. Public exposure only through `k8s/apps/cloudflared/configmap.yaml`, and only if the user asks.
+6. Public exposure only through `k8s/apps/cloudflared/configmap.yaml`, and only if the user asks.
 
 ## Terraform (Proxmox)
 
