@@ -16,3 +16,9 @@ packages/**
 .config/fish/conf.d/podman.fish
 {{ end }}
 
+
+{{ if ne .chezmoi.os "linux" }}
+# Pi is only installed on Linux
+.pi
+.pi/**
+{{ end }}

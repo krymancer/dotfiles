@@ -1,0 +1,57 @@
+# Inventory of my machines and homelab. Single source of truth for the AI agent
+# context (.chezmoitemplates/agents.md → ~/.claude/CLAUDE.md, ~/.codex/AGENTS.md, ...).
+# Keep it to facts that rarely change; live state is queried, not written down here.
+
+# chezmoi merges .chezmoidata files at the top level, so everything sits under `fleet`.
+fleet:
+  projects_dir: "~/projects"
+  infra_repo: "krymancer/homelab-infra"
+  infra_dir: "~/projects/homelab-infra"
+
+  # Workstations managed by this repo
+  workstations:
+    - name: rogue
+      os: macOS
+      role: laptop
+    - name: judy
+      os: Arch Linux
+      role: always-on laptop (never sleeps, XFCE autologin + x11vnc, T3 Code server)
+    - name: panam
+      os: Arch Linux
+      role: always-on laptop (never sleeps, XFCE autologin + x11vnc, T3 Code server)
+    - name: aurore
+      os: Windows 11
+      role: desktop, PowerShell (no fish)
+
+  # Homelab (details in the infra repo: terraform/README.md, k8s/)
+  homelab:
+    lan: 192.168.0.0/24
+    tailnet: 100.64.0.0/10
+    dns: Pi-hole at 192.168.0.20
+    hosts:
+      - name: pve
+        ip: 192.168.0.10
+        kind: Proxmox VE on a Dell G15 (standalone, not clustered)
+        ssh: root@192.168.0.10
+      - name: k3s
+        ip: 192.168.0.20
+        kind: VM 200 on pve; PRODUCTION k3s (ArgoCD, Traefik, Pi-hole LoadBalancer)
+        ssh: junho@192.168.0.20
+      - name: alt
+        ip: 192.168.0.11
+        kind: second Proxmox VE host (standalone)
+        ssh: root@alt
+      - name: hermes
+        ip: 192.168.0.22
+        kind: Debian 13 LXC 210 on alt, Tailscale SSH; LAN box for running Terraform
+        ssh: hermes
+      - name: k3s staging
+        ip: 192.168.0.23
+        kind: VM 220 on alt; STAGING k3s, usually stopped (k3s_alt_started=false)
+        ssh: ""
+    # Other tailnet nodes, so agents recognize them in `tailscale status`
+    other_tailnet_nodes:
+      - "homelab: Tailscale subnet router running inside k3s (k8s/apps/tailscale)"
+      - "termix: Termix (web SSH) in k3s"
+      - "grok-bot*: bots"
+      - "steamdeck, phones and tablets: not dev machines"
