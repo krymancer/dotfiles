@@ -10,7 +10,7 @@ Pull first (`git -C {{ .fleet.infra_dir }} pull`). Its `AGENTS.md` is the refere
 patterns. This skill is the procedure.
 
 kubectl needs `KUBECONFIG=~/.kube/config-k3s` (fish sets it; on Windows set it yourself).
-That is the **production** cluster.
+There is one cluster: VM 220 on `alt`, at 192.168.0.20. It is live, so treat every change as production.
 
 ## Debug a service
 
@@ -45,12 +45,8 @@ Follow the pattern of an existing app of the same shape (e.g. `k8s/apps/compass`
 
 ## Terraform (Proxmox)
 
-Only from a machine on the LAN (or `hermes`) with the SSH agent loaded. Read `terraform/README.md`
-first. Never attach an explicit `provider` to `proxmox_virtual_environment_vm.k3s` (production
-VM 200): it would look like a move and could destroy the live cluster. Always show a
-`terraform plan` and get the user's OK before `apply`.
-
-## Staging
-
-VM 220 on `alt` (192.168.0.23) is usually stopped. It must never take 192.168.0.20 or run
-Pi-hole or cloudflared (`k8s/argocd/staging-root.yaml` excludes them).
+There is one Proxmox host, `alt` (192.168.0.11). Run Terraform only from a machine on the LAN
+(or `hermes`) with the SSH agent loaded. `terraform/` may still describe an older layout (a `pve`
+host, a separate staging cluster). If the code and the real host disagree (`ssh root@alt qm list`,
+`pct list`), say so and don't apply. Never let a plan replace or destroy VM 220 (the cluster) or
+LXC 210 (hermes). Always show `terraform plan` and get the user's OK before `apply`.

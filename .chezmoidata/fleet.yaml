@@ -29,25 +29,21 @@ fleet:
     tailnet: 100.64.0.0/10
     dns: Pi-hole at 192.168.0.20
     hosts:
-      - name: pve
-        ip: 192.168.0.10
-        kind: Proxmox VE on a Dell G15 (standalone, not clustered)
-        ssh: root@192.168.0.10
-      - name: k3s
-        ip: 192.168.0.20
-        kind: VM 200 on pve; PRODUCTION k3s (ArgoCD, Traefik, Pi-hole LoadBalancer)
-        ssh: junho@192.168.0.20
       - name: alt
         ip: 192.168.0.11
-        kind: second Proxmox VE host (standalone)
+        kind: Proxmox VE, the only hypervisor (standalone). Hosts every guest below
         ssh: root@alt
+      - name: cluster (VM 220)
+        ip: 192.168.0.20
+        kind: "the k3s cluster (Proxmox VM name k3s) with ArgoCD, Traefik and the Pi-hole LoadBalancer"
+        ssh: junho@192.168.0.20
       - name: hermes
         ip: 192.168.0.22
         kind: Debian 13 LXC 210 on alt, Tailscale SSH; LAN box for running Terraform
         ssh: hermes
-      - name: k3s staging
-        ip: 192.168.0.23
-        kind: VM 220 on alt; STAGING k3s, usually stopped (k3s_alt_started=false)
+      - name: librae-runner-01
+        ip: DHCP
+        kind: VM 230 on alt, GitHub Actions runner for Librae (one job at a time)
         ssh: ""
     # Other tailnet nodes, so agents recognize them in `tailscale status`
     other_tailnet_nodes:
