@@ -39,6 +39,16 @@ T3 Code telemetry is off everywhere (`T3CODE_TELEMETRY_ENABLED=false`): `~/.conf
 
 Neovim config lives in its own repo ([config.nvim](https://github.com/krymancer/config.nvim)) and is pulled in via `.chezmoiexternal.toml`.
 
+## AI agent context
+
+Every AI CLI gets the same global context about this fleet and the homelab, so agents know which machine they are on, where things live and how I work:
+
+- `.chezmoidata/fleet.yaml`: the inventory (workstations, Proxmox hosts, IPs, repo locations). Update it when a machine is added or retired.
+- `.chezmoitemplates/agents.md`: the text, rendered to `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md` and, on Linux, `~/.pi/agent/AGENTS.md`.
+- `.chezmoitemplates/skill-homelab.md`: a `homelab` skill (debug an app, add a service, Terraform rules) for the same CLIs, loaded only when relevant.
+
+Repo-specific context lives in each repo's own `AGENTS.md` (e.g. the infra repo).
+
 ## Not in this repo (set up by hand)
 
 - SSH keys (`~/.ssh/id_ed25519`); add the new public key to GitHub and to `dot_config/git/allowed_signers`
