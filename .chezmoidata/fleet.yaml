@@ -5,8 +5,8 @@
 # chezmoi merges .chezmoidata files at the top level, so everything sits under `fleet`.
 fleet:
   projects_dir: "~/projects"
-  infra_repo: "krymancer/homelab-infra"
-  infra_dir: "~/projects/homelab-infra"
+  infra_repo: "krymancer/infra"
+  infra_dir: "~/projects/infra"
 
   # Workstations managed by this repo
   workstations:
@@ -43,7 +43,7 @@ fleet:
         ssh: hermes
       - name: librae-runner-01
         ip: DHCP
-        kind: VM 230 on alt, GitHub Actions runner for Librae (one job at a time)
+        kind: VM 230 on alt, GitHub Actions runner for Librae (one job at a time, not in Terraform)
         ssh: ""
     # Other tailnet nodes, so agents recognize them in `tailscale status`
     other_tailnet_nodes:

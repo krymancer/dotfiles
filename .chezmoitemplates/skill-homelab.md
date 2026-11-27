@@ -45,8 +45,12 @@ Follow the pattern of an existing app of the same shape (e.g. `k8s/apps/compass`
 
 ## Terraform (Proxmox)
 
-There is one Proxmox host, `alt` (192.168.0.11). Run Terraform only from a machine on the LAN
-(or `hermes`) with the SSH agent loaded. `terraform/` may still describe an older layout (a `pve`
-host, a separate staging cluster). If the code and the real host disagree (`ssh root@alt qm list`,
-`pct list`), say so and don't apply. Never let a plan replace or destroy VM 220 (the cluster) or
-LXC 210 (hermes). Always show `terraform plan` and get the user's OK before `apply`.
+One Proxmox host, `alt` (192.168.0.11). `terraform/README.md` is the reference: read it first.
+
+- Run it only from the LAN with the SSH agent loaded. The state lives on `hermes`.
+- Always show `terraform plan` and get the user's OK before `apply`.
+- Stop if a plan replaces or destroys VM 220 (the cluster) or LXC 210 (hermes). Never
+  `-replace` `proxmox_virtual_environment_vm.k3s`: that reinstalls it and destroys the cluster.
+- Keep `bootstrap = false` on the live guests (true overwrites hermes `authorized_keys` and re-runs
+  `tailscale up`).
+- VM 230 (Librae runner) is not managed by Terraform.
